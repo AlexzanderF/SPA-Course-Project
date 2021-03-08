@@ -1,0 +1,93 @@
+const router = require('express').Router();
+const Workout = require('../models/Workout');
+const workoutService = require('../services/workoutService');
+const checkJWT = require('../middlewares/checkJWT');
+const jwtAuthz = require('express-jwt-authz');
+
+// router.use(checkJWT);
+
+// jwtAuthz(['read:workouts']),
+router.get('/', async (req, res) => {
+    console.log(req.user);
+    // list workouts (most recent)
+    try {
+        const recentWorkouts = await workoutService.getMostRecent(6);
+        res.status(200).json({ recentWorkouts });
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({ error: error.message });
+    }
+});
+
+// jwtAuthz(['create:workouts']),
+router.post('/', async (req, res) => {
+    try {
+        const newWorkout = await workoutService.createWorkout(req.body);
+        res.status(201).json({ message: 'New workout created successfully', id: newWorkout.id });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// jwtAuthz(['read:workouts']),
+router.get('/:id', async (req, res) => {
+    // get data for a certain workout
+    const { id } = req.params;
+    try {
+        const currWorkout = await Workout.findOne({ _id: id }).lean();
+        res.status(200).json(currWorkout);
+    } catch (error) {
+        console.error(error);
+        res.status(404).json({ error: error.message });
+    }
+});
+
+// jwtAuthz(['create:workouts']),
+// router.post('/:id', async (req, res) => {
+//     // handle adding exercises and sets
+//     const { id } = req.params;
+//     try {
+//         if (req.body.newSet) {
+//             await workoutService.addSetToExercise(id, req.body);
+//             res.status(201).json({ message: 'New set added successfully' });
+//         } else if (req.body.newExercise) {
+//             await workoutService.addExerciseToWorkout(id, req.body);
+//             res.status(201).json({ message: 'New exercise added successfully' });
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         res.status(400).json({ error: error.message });
+//     }
+// });
+
+router.post('/:id/exercises', async (req, res) => {
+    // handles adding new exercises
+    const { id } = req.params;
+    const newExercise = req.body.exercise;
+    console.log(newExercise);
+    try {
+        await workoutService.addExerciseToWorkout(id, newExercise);
+        res.status(201).json({ message: 'New exercise added successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+router.post('/:id/exercises/:exercise', async (req, res) => {
+    // handles adding new sets to an exercise or !!! both new exercise and a new set directly 
+    const { id, exercise } = req.params;
+    const newSet = req.body;
+    try {
+        await workoutService.addSetToExercise(id, exercise, newSet);
+        res.status(201).json({ message: 'New set added successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+// router.get('/calendar');
+
+module.exports = router;
