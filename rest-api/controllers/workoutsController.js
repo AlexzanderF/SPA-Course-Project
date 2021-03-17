@@ -8,11 +8,15 @@ const jwtAuthz = require('express-jwt-authz');
 
 // jwtAuthz(['read:workouts']),
 router.get('/', async (req, res) => {
-    console.log(req.user);
-    // list workouts (most recent)
+    const { limit } = req.query;
     try {
-        const recentWorkouts = await workoutService.getMostRecent(6);
-        res.status(200).json({ recentWorkouts });
+        let workouts;
+        if (limit) {
+            workouts = await workoutService.getMostRecent(Number(limit));
+        } else {
+            workouts = await workoutService.getMostRecent();
+        }
+        res.status(200).json({ workouts });
     } catch (error) {
         console.error(error);
         res.status(404).json({ error: error.message });
