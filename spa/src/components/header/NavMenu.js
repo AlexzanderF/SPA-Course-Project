@@ -1,6 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 
-const btnClasses = "font-medium mx-2 p-3 border-2 border-green-500 bg-green-500 rounded-2xl";
+const btnClasses = "font-medium mx-2 p-3 border-2 border-green-500 bg-green-500 rounded-2xl shadow-md";
 
 const NavMenu = () => {
     const { isAuthenticated } = useAuth0();

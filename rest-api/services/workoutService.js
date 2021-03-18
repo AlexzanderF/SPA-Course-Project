@@ -2,7 +2,7 @@ const Workout = require('../models/Workout');
 
 module.exports = {
     getMostRecent(count) {
-        return Workout.find({}).limit(count);
+        return Workout.find({}).sort({ 'createdAt': -1 }).limit(count);
     },
 
     createWorkout(data) {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import AddWorkoutField from './AddWorkoutField';
 import RecentTab from './RecentTab';
-import Modal from './Modal';
+import CreateFormModal from './CreateFormModal';
 import * as apiService from '../../../services/apiService';
 
 const WorkoutsPreviewPage = () => {
@@ -29,7 +29,7 @@ const WorkoutsPreviewPage = () => {
                 <h3 className="text-center">No current workouts...</h3>
             }
             <AddWorkoutField showPopUp={() => setIsOpen(true)} />
-            {isOpen && <Modal closeModal={() => setIsOpen(false)} />}
+            <CreateFormModal trigger={isOpen} closeModal={() => setIsOpen(false)} />
         </div>
     );
 }
