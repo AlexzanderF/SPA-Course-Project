@@ -1,6 +1,6 @@
 const endpoints = {
     workouts: 'http://localhost:6001/api/workouts/',
-    exercises: 'http://localhost:6001/api/exercises/'
+    exercises: 'http://localhost:6001/api/exercises/',
 };
 
 export function getMostRecentWorkouts(limit) {
