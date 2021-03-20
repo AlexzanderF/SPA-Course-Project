@@ -1,12 +1,7 @@
 const router = require('express').Router();
 const Workout = require('../models/Workout');
 const workoutService = require('../services/workoutService');
-const checkJWT = require('../middlewares/checkJWT');
-const jwtAuthz = require('express-jwt-authz');
 
-// router.use(checkJWT);
-
-// jwtAuthz(['read:workouts']),
 router.get('/', async (req, res) => {
     const { limit } = req.query;
     try {
@@ -23,7 +18,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-// jwtAuthz(['create:workouts']),
 router.post('/', async (req, res) => {
     try {
         const newWorkout = await workoutService.createWorkout(req.body);
@@ -34,7 +28,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-// jwtAuthz(['read:workouts']),
 router.get('/:id', async (req, res) => {
     // get data for a certain workout
     const { id } = req.params;
@@ -47,7 +40,6 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// jwtAuthz(['create:workouts']),
 // router.post('/:id', async (req, res) => {
 //     // handle adding exercises and sets
 //     const { id } = req.params;

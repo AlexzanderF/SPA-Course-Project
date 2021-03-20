@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const Exercise = require('../models/Exercise');
-const checkJWT = require('../middlewares/checkJWT');
 
 router.get('/', async (req, res) => {
     // send info for the form such as all exercises in the database 
