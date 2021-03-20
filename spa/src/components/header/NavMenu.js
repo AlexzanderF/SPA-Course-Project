@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 const btnClasses = "font-medium mx-2 p-3 border-2 border-green-500 bg-green-500 rounded-2xl shadow-md";
 const isAuthenticated = true;
 
@@ -5,18 +6,18 @@ const NavMenu = () => {
 
     if (isAuthenticated) {
         return (
-            <div className="ml-6 mr-6 flex flex-row">
-                <div className={btnClasses}>Home</div>
-                <div className={btnClasses}>Workouts</div>
-                <div className={btnClasses}>Exercises</div>
-                <div className={btnClasses}>About</div>
+            <div className="ml-6 flex flex-row">
+                <div className={btnClasses}><Link to="/">Home</Link></div>
+                <div className={btnClasses}><Link to="/workouts">Workouts</Link></div>
+                <div className={btnClasses}><Link to="/exercises">Exercises</Link></div>
+                <div className={btnClasses}><Link to="/about">About</Link></div>
             </div>
         );
     } else {
         return (
-            <div className="ml-6 mr-6 flex flex-row">
-                <button className={btnClasses}>Home</button>
-                <button className={btnClasses}>About</button>
+            <div className="ml-6 flex flex-row">
+                <button className={btnClasses}><Link to="/">Home</Link></button>
+                <button className={btnClasses}><Link to="/about">About</Link></button>
             </div>
         );
     }

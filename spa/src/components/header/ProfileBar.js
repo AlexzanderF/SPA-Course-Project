@@ -1,15 +1,15 @@
-import { useAuth0 } from '@auth0/auth0-react';
+const btnClasses = "text-white font-medium mx-6 p-3 border-2 rounded-2xl bg-green-500 border-green-500 shadow-md";
 
 const ProfileBar = () => {
-    const { user, logout } = useAuth0();
+    function logoutHandler() {
+        console.log("FROM LOGOUT HANDLER");
+    }
 
     return (
-        <>
-            <div>Logged as [{user.nickname}]</div>
-            <button onClick={() => logout({
-                returnTo: window.location.origin
-            })}>Logout</button>
-        </>
+        <div className="ml-auto flex flex-row items-center">
+            <div>Logged as [{'SOME NICKNAME'}]</div>
+            <button className={btnClasses} onClick={logoutHandler}>Logout</button>
+        </div>
     );
 
 }
