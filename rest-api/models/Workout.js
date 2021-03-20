@@ -3,8 +3,9 @@ const { Schema } = mongoose;
 
 const workoutSchema = new Schema({
     name: { type: String, required: true },
+    type: { type: String, required: true },
+    notes: { type: String, maxlength: 1000 },
     createdBy: { type: Schema.Types.ObjectId, required: false },
-    description: { type: String, maxlength: 1000 },
     exercises: { type: Object, default: {} }
 },
     {

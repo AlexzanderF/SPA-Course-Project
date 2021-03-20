@@ -1,25 +1,25 @@
-import './App.css';
-import Header from './components/header/Header';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Header from './components/Header/Header';
 import WorkoutsPreviewPage from './components/workouts/PreviewPage/WorkoutsPreviewPage';
-import { useAuth0 } from '@auth0/auth0-react';
+import ProfilePage from './components/Profile/ProfilePage';
+const isAuthenticated = true;
 
 function App() {
-    const { error } = useAuth0();
-
-    // if (isLoading) {
-    //     return (
-    //         <h2 style={{ textAlign: 'center' }}>Logging in...</h2>
-    //     );
-    // }
-
-    if (error) {
-        console.error(error);
-    }
-
     return (
         <>
             <Header />
-            <WorkoutsPreviewPage />
+            <Router>
+                <div className="container mx-auto mt-20">
+                    <Route exact path="/"
+                        render={() => (isAuthenticated ?   // remove the "!" later
+                            <WorkoutsPreviewPage /> :
+                            <h1>Not Authenticated</h1>)}
+                    />
+                    <Route exact path="/profile/:username" component={ProfilePage} />
+                    {/* <Route exact path="/workouts/:id" component={ } /> */}
+                </div>
+            </Router>
         </>
     );
 }
