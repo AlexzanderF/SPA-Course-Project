@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+const passport = require('passport');
 const { PORT } = require('./config/config');
 const router = require('./routes');
-const cors = require('cors');
 
 app.use(express.json());
 app.use(cors({
@@ -12,6 +13,7 @@ app.use(cors({
 }));
 
 require('./config/database');
+require('./config/passport')(passport);
 
 app.use('/api', router);
 
