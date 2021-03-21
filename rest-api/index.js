@@ -14,6 +14,8 @@ app.use(cors({
 
 require('./config/database');
 require('./config/passport')(passport);
+app.use(passport.initialize());
+
 
 app.use('/api', router);
 
