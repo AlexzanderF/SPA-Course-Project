@@ -1,48 +1,39 @@
 import { useState } from 'react';
-import { useHistory } from 'react-router';
-import { loginUser } from '../../services/authService';
 
 const inputClasses = "w-1/2 p-2 mb-5 rounded-3xl border-2 border-green-500 shadow-lg focus:outline-none focus:border-2 focus:border-gray-600";
 
-const Login = () => {
-    const history = useHistory();
-    const [error, setError] = useState('');
+const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    function loginHandler(e) {
+    function registerHandler(e) {
         e.preventDefault();
-        loginUser(username, password)
-            .then(user => {
-                console.log(user);
-            })
-            .catch(err => {
-                setError(err.message);
-            });
-        history.push('/');
+        console.log(username);
+        console.log(password);
     }
 
     return (
         <div className="border-2 bg-green-500 border-green-500 rounded-3xl text-center w-1/2 mx-auto shadow-xl">
-            <h1 className="text-3xl font-medium mt-3 text-gray-800">Sign In</h1>
-            <form onSubmit={loginHandler} className="p-10 text-center">
+            <h1 className="text-3xl font-medium mt-3">Sign Up</h1>
+            <form onSubmit={registerHandler} className="p-10 text-center">
                 <div className="">
+                    {/* <label htmlFor="username">Username</label> */}
                     <input type="text" name="username" id="username" placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         className={inputClasses} />
                 </div>
                 <div>
+                    {/* <label htmlFor="password">Password</label> */}
                     <input type="text" name="password" id="password" placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className={inputClasses} />
                 </div>
-                {error && <div>{error}</div>}
-                <button type="submit" className="mt-5 p-2 border-2 border-warmGray-50 bg-warmGray-50 rounded-xl shadow-lg text-gray-800 focus:outline-none">Sign In</button>
+                <button type="submit" className="mt-5">Sign Up</button>
             </form>
         </div>
     );
 }
 
-export default Login;
+export default Register;

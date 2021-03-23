@@ -1,4 +1,4 @@
-import Spinner from '../icons/Spinner';
+import Spinner from '../Icons/Spinner';
 
 const ProfilePage = () => {
     return (

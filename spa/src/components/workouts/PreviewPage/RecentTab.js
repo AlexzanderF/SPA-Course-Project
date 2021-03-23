@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import WorkoutCard from './WorkoutCard';
-import Spinner from '../../icons/Spinner';
+import Spinner from '../../Icons/Spinner';
 import * as apiService from '../../../services/apiService';
 
 const MostRecentTab = (props) => {

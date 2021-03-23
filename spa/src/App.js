@@ -1,7 +1,7 @@
 import { Route, Switch } from 'react-router-dom';
 
 import Header from './components/Header/Header';
-import WorkoutsPreviewPage from './components/workouts/PreviewPage/WorkoutsPreviewPage';
+import WorkoutsPreviewPage from './components/Workouts/PreviewPage/WorkoutsPreviewPage';
 import ProfilePage from './components/Profile/ProfilePage';
 import LoginPage from './components/Auth/Login';
 const isAuthenticated = true;

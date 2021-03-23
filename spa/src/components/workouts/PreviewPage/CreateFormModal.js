@@ -1,4 +1,4 @@
-import CloseIcon from '../../icons/CloseIcon';
+import CloseIcon from '../../Icons/CloseIcon';
 import { useState } from 'react';
 
 const CreateForm = ({ closeModal, trigger }) => {
