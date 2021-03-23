@@ -3,6 +3,8 @@ const endpoints = {
     exercises: 'http://localhost:6001/api/exercises/',
 };
 
+const jwtToken = localStorage['token'] || null;
+
 export function getMostRecentWorkouts(limit) {
     return fetch(endpoints.workouts + (limit ? `?limit=${limit}` : ''))
         .then(res => res.json())

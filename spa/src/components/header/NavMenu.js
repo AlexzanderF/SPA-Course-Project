@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 const btnClasses = "font-medium mx-2 p-3 border-2 border-green-500 bg-green-500 rounded-2xl shadow-md";
-const isAuthenticated = true;
 
-const NavMenu = () => {
+const NavMenu = ({ isAuthenticated }) => {
 
     if (isAuthenticated) {
         return (

@@ -20,8 +20,6 @@ const calcOneRM = (reps, weight) => {
     }
 }
 
-console.log(calcOneRM(6, 75));
-
 module.exports = {
     calcOneRM,
 };

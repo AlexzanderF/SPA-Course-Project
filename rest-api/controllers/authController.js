@@ -7,9 +7,12 @@ router.post('/login', (req, res) => {
 
     authService.loginUser(password, email)
         .then((jwt) => {
-            res.status(200).json({ successful: true, ...jwt });
+            res.status(200).json({ ...jwt });
         })
-        .catch(err => res.status(401).json({ msg: err.message, successful: false }))
+        .catch(err => {
+            console.log(err);
+            res.status(400).json({ msg: err.message });
+        })
 });
 
 router.post('/register', (req, res) => {
@@ -17,9 +20,9 @@ router.post('/register', (req, res) => {
 
     authService.registerNewUser(password, username, email)
         .then((user) => {
-            res.status(201).json({ successful: true, ...authService.createJWT(user) });
+            res.status(201).json({ ...authService.createJWT(user) });
         })
-        .catch(err => res.status(400).json({ msg: err.message, successful: false }));
+        .catch(err => res.status(400).json({ msg: err.message }));
 });
 
 module.exports = router;
