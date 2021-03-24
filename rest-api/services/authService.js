@@ -43,7 +43,7 @@ async function loginUser(password, email) {
 
         if (!validatePassword(password, user.password, user.salt)) throw new Error('Invalid password');
 
-        return createJWT(user);
+        return { ...createJWT(user), username: user.username, email: user.email };
     } catch (error) {
         throw error;
     }

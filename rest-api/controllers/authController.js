@@ -6,8 +6,8 @@ router.post('/login', (req, res) => {
     const { email, password } = req.body;
 
     authService.loginUser(password, email)
-        .then((jwt) => {
-            res.status(200).json({ ...jwt });
+        .then((user) => {
+            res.status(200).json({ ...user });
         })
         .catch(err => {
             console.log(err);
@@ -20,7 +20,7 @@ router.post('/register', (req, res) => {
 
     authService.registerNewUser(password, username, email)
         .then((user) => {
-            res.status(201).json({ ...authService.createJWT(user) });
+            res.status(201).json({ ...authService.createJWT(user), username, email });
         })
         .catch(err => res.status(400).json({ msg: err.message }));
 });
