@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 
 const divClasses = "border-2 border-green-500 rounded bg-green-500 p-4 overflow-hidden shadow-lg text-white cursor-pointer";
 
 const WorkoutCard = (props) => {
+    const history = useHistory();
     const [formattedDate, setFormattedDate] = useState('');
 
     useEffect(() => {
@@ -11,7 +13,7 @@ const WorkoutCard = (props) => {
     }, [props.createdAt]);
 
     function handleRedirect() {
-
+        history.push(`/workouts/${props._id}`);
     }
 
     return (

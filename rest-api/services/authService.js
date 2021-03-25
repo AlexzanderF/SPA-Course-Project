@@ -2,6 +2,7 @@ const fs = require('fs');
 const crypto = require('crypto-js');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const isEmail = require('validator/lib/isEmail')
 
 const privKey = fs.readFileSync('jwtRS256.key', 'utf8');
 
@@ -13,6 +14,7 @@ module.exports = {
 
 async function registerNewUser(password, username, email) {
     try {
+        validateInputs(email, username, password);
         const existing = await User.findOne({ email: email });
         if (existing) {
             throw new Error('Email already in use');
@@ -71,4 +73,18 @@ function validatePassword(currPassword, hashedPassword, salt) {
     }).toString();
 
     return verifyHash === hashedPassword;
+}
+
+function validateInputs(email, username, password) {
+    if (!isEmail(email)) {
+        throw new Error('Invalid email');
+    }
+    if (username.length < 3) {
+        throw new Error('Username must be at least 3 characters long');
+    }
+    if (password.length < 8) {
+        throw new Error('Password must be at least 8 characters long');
+    }
+
+    return true;
 }

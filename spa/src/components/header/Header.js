@@ -11,7 +11,7 @@ function Header() {
 
     return (
         <header className={headerClasses}>
-            <img src="/logo.png" alt="logo" style={{ width: 100, height: 100 }} />
+            <img src="/logo.png" alt="logo" style={{ width: 145, height: 100, padding: 8 }} />
             <NavMenu isAuthenticated={isAuthenticated} />
             {isAuthenticated ?
                 <ProfileBar />

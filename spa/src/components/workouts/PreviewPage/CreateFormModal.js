@@ -1,13 +1,27 @@
+import { useState, useRef } from 'react';
+import { useHistory } from 'react-router-dom';
 import CloseIcon from '../../Icons/CloseIcon';
-import { useState } from 'react';
+import { createNewWorkout } from '../../../services/apiService';
 
 const CreateForm = ({ closeModal, trigger }) => {
+    const history = useHistory();
+    const nameInputRef = useRef();
     const [workoutName, setWorkoutName] = useState('');
     const [type, setType] = useState('');
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log('REDIRECT AND USE SERVICE');
+        if (workoutName === '') {
+            nameInputRef.current.focus();
+            nameInputRef.current.placeholder = "Required";
+            nameInputRef.current.classList.add("placeholder-red-400");
+            return;
+        }
+        createNewWorkout({ workoutName, type })
+            .then(({ id }) => {
+                history.push(`/workouts/${id}`);
+            })
+            .catch(err => console.log(err));
     }
 
     function handleChange(e) {
@@ -39,6 +53,7 @@ const CreateForm = ({ closeModal, trigger }) => {
                             name="workoutName"
                             id="name"
                             className="border-2 border-gray-500"
+                            ref={nameInputRef}
                             value={workoutName}
                             onChange={handleChange} />
                     </div>

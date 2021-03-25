@@ -5,8 +5,7 @@ const exercisesController = require('./controllers/exercisesController');
 const authController = require('./controllers/authController');
 const errHandler = require('./middlewares/errHandler');
 
-// passport.authenticate('jwt', { session: false })
-router.use('/workouts', workoutsController);
+router.use('/workouts', passport.authenticate('jwt', { session: false }), workoutsController);
 router.use('/exercises', exercisesController);
 router.use('/users', authController);
 

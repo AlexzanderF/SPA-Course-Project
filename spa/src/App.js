@@ -4,10 +4,11 @@ import UserContext from './user-context';
 
 import ProtectedRoute from './protected-route';
 import Header from './components/Header/Header';
-import WorkoutsPreviewPage from './components/Workouts/PreviewPage/WorkoutsPreviewPage';
-import ProfilePage from './components/Profile/ProfilePage';
 import LoginPage from './components/Auth/LoginPage';
 import RegisterPage from './components/Auth/RegisterPage';
+import ProfilePage from './components/Profile/ProfilePage';
+import WorkoutsPreviewPage from './components/Workouts/PreviewPage/WorkoutsPreviewPage';
+import WorkoutPage from './components/Workouts/SingleWorkout/WorkoutPage';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(localStorage['token'] ? true : false);
@@ -23,7 +24,11 @@ function App() {
                             <h1>Not Authenticated</h1>)}
                     />
                     <Route exact path="/profile/:username" component={ProfilePage} />
-                    {/* <Route exact path="/workouts/:id" component={ } /> */}
+                    <ProtectedRoute exact
+                        path="/workouts/:id"
+                        isAuthenticated={isAuthenticated}
+                        component={WorkoutPage}
+                    />
                     <ProtectedRoute exact
                         path="/login"
                         isAuthenticated={!isAuthenticated}
