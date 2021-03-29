@@ -18,7 +18,13 @@ module.exports = {
     },
 
     async addSetToExercise(id, exercise, newSet) {
+        newSet.id = new Date().valueOf().toString();
+        console.log(newSet.id);
         const path = `exercises.${exercise}`;
         return Workout.updateOne({ _id: id }, { $push: { [path]: newSet } });
+    },
+
+    async deleteSet(workoutId, exercise, setId) {
+
     }
 };

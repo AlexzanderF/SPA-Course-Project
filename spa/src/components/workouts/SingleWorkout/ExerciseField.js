@@ -4,8 +4,10 @@ import SetBar from './SetBar';
 const ExerciseField = (props) => {
     const [sets, setSets] = useState(props.sets);
 
-    function removeSet() {
-        let filtered;
+    function removeSet(index) {
+        let removed = sets.splice(index, 1);
+        console.log(sets);
+        // REMOVE FROM DB AND THEN UPDATE STATE !!!
         setSets();
     }
 
@@ -22,7 +24,8 @@ const ExerciseField = (props) => {
                 </div>
                 <div className="flex flex-col w-2/3 mt-2">
                     {sets.map((set, index) => {
-                        return <SetBar key={new Date().valueOf()} setInfo={{ ...set, index }} />;
+                        console.log(set);
+                        return <SetBar key={set.id} setInfo={{ ...set, index }} removeSet={removeSet} />;
                     })}
                 </div>
                 <button className="border-2 rounded-xl border-green-500 bg-green-500 text-white font-semibold p-1 mt-4">Add Set</button>

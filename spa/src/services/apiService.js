@@ -2,7 +2,6 @@ const endpoints = {
     workouts: 'http://localhost:6001/api/workouts/',
     exercises: 'http://localhost:6001/api/exercises/',
 };
-
 const jwtToken = localStorage['token'] || null;
 
 export function getMostRecentWorkouts(limit) {
@@ -43,6 +42,10 @@ export function getWorkoutData(id) {
         }
     })
         .then(res => res.json());
+}
+
+export function deleteExerciseSet(workoutId, exercise, setId) {
+
 }
 
 

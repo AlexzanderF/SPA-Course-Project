@@ -4,8 +4,8 @@ import Spinner from '../../Icons/Spinner';
 import ExerciseField from './ExerciseField';
 
 const WorkoutPage = ({ match: { params: { id } } }) => {
-    const [workoutInfo, setWorkoutInfo] = useState();
-    const [exercises, setExercises] = useState();
+    const [workoutInfo, setWorkoutInfo] = useState({});
+    const [exercises, setExercises] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {

@@ -84,6 +84,17 @@ router.post('/:id/exercises/:exercise', async (req, res) => {
     }
 });
 
+router.delete('/:workoutId/exercises/:exercise/:setId', async (req, res) => {
+    const { workoutId, exercise, setId } = req.params;
+    try {
+        await workoutService.deleteSet(workoutId, exercise, setId);
+        res.status(201).json({ message: 'Set deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: error.message });
+    }
+})
+
 // router.get('/calendar');
 
 module.exports = router;
