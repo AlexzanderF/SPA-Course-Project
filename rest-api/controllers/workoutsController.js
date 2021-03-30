@@ -85,7 +85,8 @@ router.post('/:id/exercises/:exercise', async (req, res) => {
 });
 
 router.delete('/:workoutId/exercises/:exercise/:setId', async (req, res) => {
-    const { workoutId, exercise, setId } = req.params;
+    let { workoutId, exercise, setId } = req.params;
+    exercise = exercise.replace(/\%20/g, ' ');
     try {
         await workoutService.deleteSet(workoutId, exercise, setId);
         res.status(201).json({ message: 'Set deleted successfully' });
