@@ -31,7 +31,7 @@ const ExerciseField = (props) => {
         const workoutId = currentWorkoutData.id;
         const exerciseName = props.children;
         addNewSet(workoutId, exerciseName, { reps, weight })
-            .then((newSet) => {
+            .then(({ newSet }) => {
                 console.log(newSet);
                 // let filteredSets = sets.filter(x => Object.keys(x).length !== 0);
                 // setSets((prev) => [...filteredSets, newSet]);

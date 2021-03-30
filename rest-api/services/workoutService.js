@@ -21,7 +21,8 @@ module.exports = {
         newSet.id = new Date().valueOf().toString();
         console.log(newSet.id);
         const path = `exercises.${exercise}`;
-        return Workout.updateOne({ _id: id }, { $push: { [path]: newSet } });
+        await Workout.updateOne({ _id: id }, { $push: { [path]: newSet } });
+        return newSet;
     },
 
     async deleteSet(workoutId, exercise, setId) {

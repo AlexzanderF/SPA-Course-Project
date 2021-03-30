@@ -77,7 +77,6 @@ router.post('/:id/exercises/:exercise', async (req, res) => {
     const newSet = req.body;
     try {
         const createdSet = await workoutService.addSetToExercise(id, exercise, newSet);
-        console.log(createdSet);
         res.status(201).json({ message: 'New set added successfully', newSet: createdSet });
     } catch (error) {
         console.error(error);
