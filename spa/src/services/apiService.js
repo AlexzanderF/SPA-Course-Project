@@ -1,6 +1,7 @@
+const apiUrl = 'https://workout-tracker-rest-api.herokuapp.com/api/';
 const endpoints = {
-    workouts: 'http://localhost:6001/api/workouts/',
-    exercises: 'http://localhost:6001/api/exercises/',
+    workouts: apiUrl + 'workouts/',
+    exercises: apiUrl + 'exercises/',
 };
 const jwtToken = localStorage['token'] || null;
 
@@ -35,7 +36,6 @@ export function createNewWorkout(data) {
 }
 
 export function getWorkoutData(id) {
-    console.log(endpoints.workouts + `${id}`);
     return fetch(endpoints.workouts + `${id}`, {
         headers: {
             'Authorization': `Bearer ${jwtToken}`
@@ -44,8 +44,26 @@ export function getWorkoutData(id) {
         .then(res => res.json());
 }
 
-export function deleteExerciseSet(workoutId, exercise, setId) {
+export function addNewSet(workoutId, exercise, data) {
+    console.log(endpoints.workouts + `${workoutId}/exercises/${exercise}/`);
+    return fetch(endpoints.workouts + `${workoutId}/exercises/${exercise}/`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${jwtToken}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+        .then(res => res.json());
+}
 
+export function deleteExerciseSet(workoutId, exercise, setId) {
+    return fetch(endpoints.workouts + `${workoutId}/exercises/${exercise}/${setId}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${jwtToken}`
+        }
+    });
 }
 
 

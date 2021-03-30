@@ -35,6 +35,9 @@ const CreateForm = ({ closeModal, trigger }) => {
                 setType(value);
                 console.log(value);
                 break;
+            default:
+                console.log(name);
+                break;
         }
     }
 

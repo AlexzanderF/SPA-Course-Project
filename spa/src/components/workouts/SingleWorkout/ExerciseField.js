@@ -1,14 +1,42 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import SetBar from './SetBar';
+import { deleteExerciseSet, addNewSet } from '../../../services/apiService';
+import WorkoutDataContext from '../../../workoutData-context';
 
 const ExerciseField = (props) => {
+    const currentWorkoutData = useContext(WorkoutDataContext);
     const [sets, setSets] = useState(props.sets);
 
-    function removeSet(index) {
-        let removed = sets.splice(index, 1);
-        console.log(sets);
-        // REMOVE FROM DB AND THEN UPDATE STATE !!!
-        setSets();
+    function removeSet(setId) {
+        if (typeof setId === 'string') {
+            const workoutId = currentWorkoutData.id;
+            const exerciseName = props.children;
+            deleteExerciseSet(workoutId, exerciseName, setId).then(() => {
+                let filtered = sets.filter(x => x.setId !== setId);
+                setSets(filtered);
+            })
+                .catch(err => console.log(err));
+        } else {
+            let arr = [...sets];
+            arr.splice(setId, 1);
+            setSets(arr);
+        }
+    }
+
+    function addSetBar() {
+        setSets((prev) => [...prev, {}]);
+    }
+
+    function createSet(reps, weight) {
+        const workoutId = currentWorkoutData.id;
+        const exerciseName = props.children;
+        addNewSet(workoutId, exerciseName, { reps, weight })
+            .then((newSet) => {
+                console.log(newSet);
+                // let filteredSets = sets.filter(x => Object.keys(x).length !== 0);
+                // setSets((prev) => [...filteredSets, newSet]);
+            })
+            .catch(err => console.log(err));
     }
 
     return (
@@ -24,11 +52,15 @@ const ExerciseField = (props) => {
                 </div>
                 <div className="flex flex-col w-2/3 mt-2">
                     {sets.map((set, index) => {
-                        console.log(set);
-                        return <SetBar key={set.id} setInfo={{ ...set, index }} removeSet={removeSet} />;
+                        return <SetBar
+                            key={set.id || index}
+                            index={index}
+                            setInfo={{ ...set }}
+                            {...{ removeSet, createSet }}
+                        />;
                     })}
                 </div>
-                <button className="border-2 rounded-xl border-green-500 bg-green-500 text-white font-semibold p-1 mt-4">Add Set</button>
+                <button className="border-2 rounded-xl border-green-500 bg-green-500 text-white font-semibold p-1 mt-4" onClick={addSetBar}>Add Set</button>
             </div>
         </div>
     );
