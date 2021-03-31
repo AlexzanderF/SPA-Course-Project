@@ -19,7 +19,11 @@ module.exports = {
 
 
     async deleteExercise(id, exercise) {
-        await Workout.updateOne({ _id: id }, { exercises: { [exercise]: undefined } }, false, true);
+        const test = await Workout.updateOne(
+            { _id: id },
+            { exercises: { $unset: { [exercise]: undefined } } },
+            { omitUndefined: true });
+        return test;
         return Workout.findOne({ _id: id }).exercises;
     },
 
