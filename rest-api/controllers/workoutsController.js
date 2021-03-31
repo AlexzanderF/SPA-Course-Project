@@ -40,31 +40,24 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// router.post('/:id', async (req, res) => {
-//     // handle adding exercises and sets
-//     const { id } = req.params;
-//     try {
-//         if (req.body.newSet) {
-//             await workoutService.addSetToExercise(id, req.body);
-//             res.status(201).json({ message: 'New set added successfully' });
-//         } else if (req.body.newExercise) {
-//             await workoutService.addExerciseToWorkout(id, req.body);
-//             res.status(201).json({ message: 'New exercise added successfully' });
-//         }
-//     } catch (error) {
-//         console.error(error);
-//         res.status(400).json({ error: error.message });
-//     }
-// });
-
 router.post('/:id/exercises', async (req, res) => {
     // handles adding new exercises
     const { id } = req.params;
     const newExercise = req.body.exercise;
-    console.log(newExercise);
     try {
         await workoutService.addExerciseToWorkout(id, newExercise);
         res.status(201).json({ message: 'New exercise added successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: error.message });
+    }
+});
+
+router.delete('/:id/exercises/:exercise', async (req, res) => {
+    const { id, exercise } = req.params;
+    try {
+        const remainingExercises = await workoutService.deleteExercise(id, exercise);
+        res.status(200).json({ message: 'Exercise deleted successfully', remainingExercises });
     } catch (error) {
         console.error(error);
         res.status(400).json({ error: error.message });

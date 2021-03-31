@@ -1,9 +1,10 @@
 import { useState, useContext } from 'react';
 import SetBar from './SetBar';
+import CloseIcon2 from '../../Icons/CloseIcon2';
 import { deleteExerciseSet, addNewSet } from '../../../services/apiService';
 import WorkoutDataContext from '../../../workoutData-context';
 
-const ExerciseField = (props) => {
+const ExerciseField = ({ removeExercise, ...props }) => {
     const currentWorkoutData = useContext(WorkoutDataContext);
     const [sets, setSets] = useState(props.sets);
 
@@ -12,7 +13,8 @@ const ExerciseField = (props) => {
             const workoutId = currentWorkoutData.id;
             const exerciseName = props.children;
             deleteExerciseSet(workoutId, exerciseName, setId).then(() => {
-                let filtered = sets.filter(x => x.setId !== setId);
+                let filtered = sets.filter(x => x.id !== setId);
+                console.log(filtered);
                 setSets(filtered);
             })
                 .catch(err => console.log(err));
@@ -38,10 +40,15 @@ const ExerciseField = (props) => {
             .catch(err => console.log(err));
     }
 
+    function removeExercise() {
+
+    }
+
     return (
         <div className="mb-6 border-2 border-green-500 shadow-lg rounded-lg">
             <div className="pl-6 p-2 text-xl border-b-2 border-green-500 bg-green-500 text-white font-semibold">
                 {props.children}
+                <CloseIcon2 className="mt-0.5 rounded bg-red-500 float-right inline" onClick={removeExercise} />
             </div>
             <div className="px-8 py-4">
                 <div className="flex flex-row w-2/3 text-lg font-medium">

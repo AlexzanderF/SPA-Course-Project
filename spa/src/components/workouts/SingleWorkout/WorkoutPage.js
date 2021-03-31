@@ -25,6 +25,7 @@ const WorkoutPage = ({ match: { params: { id } } }) => {
             .catch(err => console.log(err));
     }, [id]);
 
+
     return (
         <div>
             { isLoading ? <Spinner /> :
@@ -35,12 +36,12 @@ const WorkoutPage = ({ match: { params: { id } } }) => {
                     </div>
                     <div className="mt-10 mx-auto p-5 w-5/6 flex flex-col flex-wrap">
                         {Object.keys(exercises).map((exercise) => {
-                            return <ExerciseField key={exercise} sets={exercises[exercise]}>
+                            return <ExerciseField key={exercise} sets={exercises[exercise]} >
                                 {exercise}
                             </ExerciseField>;
                         })}
                     </div>
-                    <div className="w-5/6 mx-auto pl-5">Add Exercise</div>
+                    <div className="w-2/6 mx-auto pl-5">Add Exercise</div>
                 </WorkoutDataContext.Provider>
             }
         </div>

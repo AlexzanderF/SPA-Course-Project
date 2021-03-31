@@ -17,6 +17,12 @@ module.exports = {
         return workout.save();
     },
 
+
+    async deleteExercise(id, exercise) {
+        await Workout.updateOne({ _id: id }, { exercises: { [exercise]: undefined } }, false, true);
+        return Workout.findOne({ _id: id }).exercises;
+    },
+
     async addSetToExercise(id, exercise, newSet) {
         newSet.id = new Date().valueOf().toString();
         console.log(newSet.id);

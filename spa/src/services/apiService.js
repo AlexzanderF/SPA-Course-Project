@@ -45,7 +45,6 @@ export function getWorkoutData(id) {
 }
 
 export function addNewSet(workoutId, exercise, data) {
-    console.log(endpoints.workouts + `${workoutId}/exercises/${exercise}/`);
     return fetch(endpoints.workouts + `${workoutId}/exercises/${exercise}/`, {
         method: 'POST',
         headers: {
