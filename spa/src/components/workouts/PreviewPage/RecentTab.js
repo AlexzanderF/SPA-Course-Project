@@ -10,7 +10,6 @@ const MostRecentTab = (props) => {
 
     useEffect(() => {
         const { email } = JSON.parse(localStorage.getItem('user'));
-        console.log(email);
         apiService.getMostRecentWorkouts(3, email)
             .then((recentWorkouts) => {
                 if (recentWorkouts) {

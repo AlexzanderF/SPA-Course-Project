@@ -13,11 +13,16 @@ const RegisterPage = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [rePassword, setRePassword] = useState('');
 
     function registerHandler(e) {
         e.preventDefault();
         if (email === '' || password === '' || username === '') {
             setError('Fill all input fields');
+            return;
+        }
+        if (rePassword !== password) {
+            setError('Passwords doesn\'t match');
             return;
         }
         registerUser(username, email, password)
@@ -56,6 +61,12 @@ const RegisterPage = () => {
                     <input type="password" name="password" id="password" placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        className={inputClasses} />
+                </div>
+                <div>
+                    <input type="password" name="rePassword" id="rePassword" placeholder="Repeat password"
+                        value={rePassword}
+                        onChange={(e) => setRePassword(e.target.value)}
                         className={inputClasses} />
                 </div>
                 {error && (<div className={errorBoxClasses}>{error}</div>)}
