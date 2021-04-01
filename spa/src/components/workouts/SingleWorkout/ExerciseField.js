@@ -42,7 +42,7 @@ const ExerciseField = (props) => {
 
     function removeExercise() {
         deleteExercise(workoutInfo.id, props.children)
-            .then((remaining) => {
+            .then(() => {
                 let copy = Object.assign({}, exercises);
                 delete copy[props.children];
                 setExercises(copy);

@@ -52,6 +52,7 @@ export function getWorkoutData(id) {
 }
 
 export function addWorkoutNotes(id, notes) {
+    console.log(JSON.stringify({ notes }));
     return fetch(endpoints.workouts + `${id}/notes`, {
         method: 'POST',
         headers: {
