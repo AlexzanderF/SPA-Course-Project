@@ -27,17 +27,17 @@ const WorkoutPage = ({ match: { params: { id } } }) => {
             .catch(err => console.log(err));
     }, [id]);
 
-    function removeExercise(id, exercise) {
-        deleteExercise(id, exercise)
-            .then(({ remainingExercises }) => {
-                if (remainingExercises) {
-                    setExercises(remainingExercises);
-                } else {
-                    setExercises(null);
-                }
-            })
-            .catch(err => console.log(err));
-    }
+    // function removeExercise(id, exercise) {
+    //     deleteExercise(id, exercise)
+    //         .then(({ remainingExercises }) => {
+    //             if (remainingExercises) {
+    //                 setExercises(remainingExercises);
+    //             } else {
+    //                 setExercises(null);
+    //             }
+    //         })
+    //         .catch(err => console.log(err));
+    // }
 
     return (
         <div>

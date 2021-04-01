@@ -4,7 +4,7 @@ import WorkoutDataContext from '../../../workoutData-context';
 
 const NotesField = () => {
     const { workoutInfo, setWorkoutInfo } = useContext(WorkoutDataContext);
-    const [notes, setNotes] = useState(workoutInfo.notes);
+    const [notes, setNotes] = useState(workoutInfo.notes || '');
     const [error, setError] = useState('');
 
     function submitNotes() {

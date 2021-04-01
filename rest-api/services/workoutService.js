@@ -6,7 +6,6 @@ module.exports = {
     },
 
     createWorkout(data) {
-        console.log(data);
         return new Workout({ ...data }).save();
     },
 
@@ -29,7 +28,6 @@ module.exports = {
 
     async addSetToExercise(id, exercise, newSet) {
         newSet.id = new Date().valueOf().toString();
-        console.log(newSet.id);
         const path = `exercises.${exercise}`;
         await Workout.updateOne({ _id: id }, { $push: { [path]: newSet } });
         return newSet;

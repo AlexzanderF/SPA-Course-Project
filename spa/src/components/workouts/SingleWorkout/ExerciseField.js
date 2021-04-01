@@ -4,7 +4,7 @@ import CloseIcon2 from '../../Icons/CloseIcon2';
 import { deleteExerciseSet, addNewSet, deleteExercise } from '../../../services/apiService';
 import WorkoutDataContext from '../../../workoutData-context';
 
-const ExerciseField = ({ removeExercise, ...props }) => {
+const ExerciseField = (props) => {
     const { exercises, setExercises, workoutInfo } = useContext(WorkoutDataContext);
     const [sets, setSets] = useState(props.sets);
 

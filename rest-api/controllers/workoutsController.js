@@ -56,7 +56,6 @@ router.post('/:id/exercises', async (req, res) => {
 router.post('/:id/notes', async (req, res) => {
     const { id } = req.params;
     const { notes } = req.body;
-    console.log(notes);
     try {
         await workoutService.updateNotes(id, notes);
         res.status(201).json({ message: 'Notes updated successfully' });
