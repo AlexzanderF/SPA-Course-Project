@@ -1,8 +1,8 @@
 const Workout = require('../models/Workout');
 
 module.exports = {
-    getMostRecent(count) {
-        return Workout.find({}).sort({ 'createdAt': -1 }).limit(count);
+    getMostRecent(email, count) {
+        return Workout.find({ createdBy: email }).sort({ 'createdAt': -1 }).limit(count);
     },
 
     createWorkout(data) {
@@ -19,12 +19,12 @@ module.exports = {
 
 
     async deleteExercise(id, exercise) {
-        const test = await Workout.updateOne(
+        const path = `exercises.${exercise}`;
+        console.log(exercise);
+        await Workout.updateOne(
             { _id: id },
-            { exercises: { $unset: { [exercise]: undefined } } },
-            { omitUndefined: true });
-        return test;
-        return Workout.findOne({ _id: id }).exercises;
+            { $unset: { [path]: undefined } });
+        return (await Workout.findOne({ _id: id })).exercises;
     },
 
     async addSetToExercise(id, exercise, newSet) {

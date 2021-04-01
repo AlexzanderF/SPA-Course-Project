@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import SetBar from './SetBar';
 import CloseIcon2 from '../../Icons/CloseIcon2';
-import { deleteExerciseSet, addNewSet } from '../../../services/apiService';
+import { deleteExerciseSet, addNewSet, deleteExercise } from '../../../services/apiService';
 import WorkoutDataContext from '../../../workoutData-context';
 
 const ExerciseField = ({ removeExercise, ...props }) => {
@@ -41,7 +41,11 @@ const ExerciseField = ({ removeExercise, ...props }) => {
     }
 
     function removeExercise() {
+        deleteExercise(currentWorkoutData.id, props.children)
+            .then((remaining) => {
 
+            })
+            .catch(err => console.log(err));
     }
 
     return (

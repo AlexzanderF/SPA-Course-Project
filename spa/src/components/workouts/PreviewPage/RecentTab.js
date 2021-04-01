@@ -9,7 +9,9 @@ const MostRecentTab = (props) => {
     const [workouts, setWorkouts] = useState([]);
 
     useEffect(() => {
-        apiService.getMostRecentWorkouts(3)
+        const { email } = JSON.parse(localStorage.getItem('user'));
+        console.log(email);
+        apiService.getMostRecentWorkouts(3, email)
             .then((recentWorkouts) => {
                 if (recentWorkouts) {
                     setWorkouts(recentWorkouts);

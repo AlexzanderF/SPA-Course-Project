@@ -3,13 +3,13 @@ const Workout = require('../models/Workout');
 const workoutService = require('../services/workoutService');
 
 router.get('/', async (req, res) => {
-    const { limit } = req.query;
+    const { limit, user } = req.query;
     try {
         let workouts;
         if (limit) {
-            workouts = await workoutService.getMostRecent(Number(limit));
+            workouts = await workoutService.getMostRecent(user, Number(limit));
         } else {
-            workouts = await workoutService.getMostRecent();
+            workouts = await workoutService.getMostRecent(user);
         }
         res.status(200).json({ workouts });
     } catch (error) {
@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
 router.post('/:id/exercises', async (req, res) => {
     // handles adding new exercises
     const { id } = req.params;
-    const newExercise = req.body.exercise;
+    const newExercise = req.body;
     try {
         await workoutService.addExerciseToWorkout(id, newExercise);
         res.status(201).json({ message: 'New exercise added successfully' });

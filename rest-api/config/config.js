@@ -6,6 +6,6 @@ module.exports = {
     },
     production: {
         PORT: process.env.PORT,
-        DB_URI: 'mongodb+srv://Defensi4a:a14789632@devushka.eu2ox.mongodb.net/workout-tracker?retryWrites=true&w=majority',
+        DB_URI: process.env.DB_URI,
     }
 }[process.env.NODE_ENV ? process.env.NODE_ENV.trim() : 'development'];

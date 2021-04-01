@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Spinner from '../../Icons/Spinner';
 import ExerciseField from './ExerciseField';
-import { getWorkoutData } from '../../../services/apiService';
+import { getWorkoutData, deleteExercise } from '../../../services/apiService';
 import WorkoutDataContext from '../../../workoutData-context';
 
 const WorkoutPage = ({ match: { params: { id } } }) => {
@@ -25,6 +25,17 @@ const WorkoutPage = ({ match: { params: { id } } }) => {
             .catch(err => console.log(err));
     }, [id]);
 
+    function removeExercise(id, exercise) {
+        deleteExercise(id, exercise)
+            .then(({ remainingExercises }) => {
+                if (remainingExercises) {
+                    setExercises(remainingExercises);
+                } else {
+                    setExercises(null);
+                }
+            })
+            .catch(err => console.log(err));
+    }
 
     return (
         <div>

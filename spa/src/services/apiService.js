@@ -5,8 +5,8 @@ const endpoints = {
 };
 const jwtToken = localStorage['token'] || null;
 
-export function getMostRecentWorkouts(limit) {
-    return fetch(endpoints.workouts + (limit ? `?limit=${limit}` : ''), {
+export function getMostRecentWorkouts(limit, email) {
+    return fetch(endpoints.workouts + (limit ? `?limit=${limit}` : '') + (`&user=${email}`), {
         headers: {
             'Authorization': `Bearer ${jwtToken}`
         }
@@ -65,4 +65,12 @@ export function deleteExerciseSet(workoutId, exercise, setId) {
     });
 }
 
-
+export function deleteExercise(id, exercise) {
+    return fetch(endpoints.workouts + `${id}/exercises/${exercise}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${jwtToken}`
+        }
+    })
+        .then(res => res.json());
+}
