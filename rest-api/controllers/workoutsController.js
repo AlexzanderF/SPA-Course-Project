@@ -53,6 +53,18 @@ router.post('/:id/exercises', async (req, res) => {
     }
 });
 
+router.post('/:id/notes', async (req, res) => {
+    const { id } = req.params;
+    const { notes } = req.body;
+    try {
+        await workoutService.updateNotes(id, notes);
+        res.status(201).json({ message: 'Notes updated successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ error: error.message });
+    }
+});
+
 router.delete('/:id/exercises/:exercise', async (req, res) => {
     const { id, exercise } = req.params;
     try {

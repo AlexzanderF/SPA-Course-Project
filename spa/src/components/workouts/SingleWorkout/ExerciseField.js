@@ -5,12 +5,12 @@ import { deleteExerciseSet, addNewSet, deleteExercise } from '../../../services/
 import WorkoutDataContext from '../../../workoutData-context';
 
 const ExerciseField = ({ removeExercise, ...props }) => {
-    const currentWorkoutData = useContext(WorkoutDataContext);
+    const { exercises, setExercises, workoutInfo } = useContext(WorkoutDataContext);
     const [sets, setSets] = useState(props.sets);
 
     function removeSet(setId) {
         if (typeof setId === 'string') {
-            const workoutId = currentWorkoutData.id;
+            const workoutId = workoutInfo.workoutInfo.id;
             const exerciseName = props.children;
             deleteExerciseSet(workoutId, exerciseName, setId).then(() => {
                 let filtered = sets.filter(x => x.id !== setId);
@@ -30,7 +30,7 @@ const ExerciseField = ({ removeExercise, ...props }) => {
     }
 
     function createSet(reps, weight) {
-        const workoutId = currentWorkoutData.id;
+        const workoutId = workoutInfo.id;
         const exerciseName = props.children;
         addNewSet(workoutId, exerciseName, { reps, weight })
             .then(({ newSet }) => {
@@ -41,9 +41,11 @@ const ExerciseField = ({ removeExercise, ...props }) => {
     }
 
     function removeExercise() {
-        deleteExercise(currentWorkoutData.id, props.children)
+        deleteExercise(workoutInfo.id, props.children)
             .then((remaining) => {
-
+                let copy = Object.assign({}, exercises);
+                delete copy[props.children];
+                setExercises(copy);
             })
             .catch(err => console.log(err));
     }
@@ -52,7 +54,9 @@ const ExerciseField = ({ removeExercise, ...props }) => {
         <div className="mb-6 border-2 border-green-500 shadow-lg rounded-lg">
             <div className="pl-6 p-2 text-xl border-b-2 border-green-500 bg-green-500 text-white font-semibold">
                 {props.children}
-                <CloseIcon2 className="mt-0.5 rounded bg-red-500 float-right inline" onClick={removeExercise} />
+                <div onClick={removeExercise} className="w-6 h-6 mt-0.5 rounded bg-red-500 float-right inline">
+                    <CloseIcon2 />
+                </div>
             </div>
             <div className="px-8 py-4">
                 <div className="flex flex-row w-2/3 text-lg font-medium">

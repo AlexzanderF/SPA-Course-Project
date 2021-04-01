@@ -7,7 +7,7 @@ const CreateForm = ({ closeModal, trigger }) => {
     const history = useHistory();
     const nameInputRef = useRef();
     const [workoutName, setWorkoutName] = useState('');
-    const [type, setType] = useState('');
+    const [type, setType] = useState('weightlifting');
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -18,9 +18,9 @@ const CreateForm = ({ closeModal, trigger }) => {
             return;
         }
         createNewWorkout({ workoutName, type })
-            .then((x) => {
-                console.log(x);
-                // history.push(`/workouts/${}`);
+            .then(({ id }) => {
+                console.log(id);
+                history.push(`/workouts/${id}`);
             })
             .catch(err => console.log(err));
     }

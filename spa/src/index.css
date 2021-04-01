@@ -6,6 +6,9 @@
   button {
     @apply outline-none;
   }
+  button:focus {
+    @apply outline-none;
+  }
   div {
     @apply box-border;
   }

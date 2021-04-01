@@ -51,6 +51,17 @@ export function getWorkoutData(id) {
         .then(res => res.json());
 }
 
+export function addWorkoutNotes(id, notes) {
+    return fetch(endpoints.workouts + `${id}/notes`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${getJWT()}`
+        },
+        body: JSON.stringify({ notes })
+    })
+        .then(res => res.json());
+}
+
 export function addNewSet(workoutId, exercise, data) {
     return fetch(endpoints.workouts + `${workoutId}/exercises/${exercise}/`, {
         method: 'POST',

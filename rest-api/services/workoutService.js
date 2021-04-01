@@ -38,5 +38,9 @@ module.exports = {
     async deleteSet(workoutId, exercise, setId) {
         const path = `exercises.${exercise}`;
         return Workout.updateOne({ _id: workoutId }, { $pull: { [path]: { id: setId } } });
+    },
+
+    async updateNotes(id, notes) {
+        return Workout.updateOne({ _id: id }, { notes: notes });
     }
 };
