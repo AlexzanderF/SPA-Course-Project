@@ -29,15 +29,15 @@ export function getMostRecentWorkouts(limit, email) {
         .catch(err => console.log(err));
 }
 
-export function createNewWorkout(data) {
-    const email = getUserEmail();
+export function createNewWorkout({ workoutName: name, type }) {
+    const createdBy = getUserEmail();
     return fetch(endpoints.workouts, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${getJWT()}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ ...data, email })
+        body: JSON.stringify({ name, type, createdBy })
     })
         .then(res => res.json());
 }

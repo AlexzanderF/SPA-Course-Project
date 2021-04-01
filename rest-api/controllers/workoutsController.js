@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const newWorkout = await workoutService.createWorkout(req.body);
-        res.status(201).json({ message: 'New workout created successfully', id: newWorkout.id });
+        res.status(201).json({ message: 'New workout created successfully', id: newWorkout._id });
     } catch (error) {
         console.error(error);
         res.status(400).json({ error: error.message });

@@ -6,7 +6,7 @@ import WorkoutDataContext from '../../../workoutData-context';
 
 const WorkoutPage = ({ match: { params: { id } } }) => {
     const [workoutInfo, setWorkoutInfo] = useState({});
-    const [exercises, setExercises] = useState({});
+    const [exercises, setExercises] = useState();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -46,11 +46,15 @@ const WorkoutPage = ({ match: { params: { id } } }) => {
                         <h2 className="text-xl m-3">Date: {workoutInfo.createdAt}</h2>
                     </div>
                     <div className="mt-10 mx-auto p-5 w-5/6 flex flex-col flex-wrap">
-                        {Object.keys(exercises).map((exercise) => {
-                            return <ExerciseField key={exercise} sets={exercises[exercise]} >
-                                {exercise}
-                            </ExerciseField>;
-                        })}
+                        {exercises ?
+                            Object.keys(exercises).map((exercise) => {
+                                return <ExerciseField key={exercise} sets={exercises[exercise]} >
+                                    {exercise}
+                                </ExerciseField>;
+                            })
+                            :
+                            <h1 className="mx-auto">No exercises...</h1>
+                        }
                     </div>
                     <div className="w-2/6 mx-auto pl-5">Add Exercise</div>
                 </WorkoutDataContext.Provider>
