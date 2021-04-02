@@ -43,7 +43,7 @@ router.get('/:id', async (req, res) => {
 router.post('/:id/exercises', async (req, res) => {
     // handles adding new exercises
     const { id } = req.params;
-    const newExercise = req.body;
+    const { newExercise } = req.body;
     try {
         await workoutService.addExerciseToWorkout(id, newExercise);
         res.status(201).json({ message: 'New exercise added successfully' });

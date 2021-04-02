@@ -13,10 +13,8 @@ const NotesField = () => {
             setError('Too long (max 200 chars)');
             return;
         }
-        console.log(notes);
         addWorkoutNotes(id, notes)
             .then((data) => {
-                console.log(data);
                 setError('');
                 setWorkoutInfo({ ...workoutInfo, notes });
             })

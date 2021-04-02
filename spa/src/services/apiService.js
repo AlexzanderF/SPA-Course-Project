@@ -52,11 +52,11 @@ export function getWorkoutData(id) {
 }
 
 export function addWorkoutNotes(id, notes) {
-    console.log(JSON.stringify({ notes }));
     return fetch(endpoints.workouts + `${id}/notes`, {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${getJWT()}`
+            'Authorization': `Bearer ${getJWT()}`,
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify({ notes })
     })
@@ -92,4 +92,15 @@ export function deleteExercise(id, exercise) {
         }
     })
         .then(res => res.json());
+}
+
+export function addExercise(id, newExercise) {
+    return fetch(endpoints.workouts + `${id}/exercises/`, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${getJWT()}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ newExercise })
+    })
 }

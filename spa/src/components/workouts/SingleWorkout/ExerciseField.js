@@ -1,11 +1,11 @@
 import { useState, useContext } from 'react';
 import SetBar from './SetBar';
 import CloseIcon2 from '../../Icons/CloseIcon2';
-import { deleteExerciseSet, addNewSet, deleteExercise } from '../../../services/apiService';
+import { deleteExerciseSet, addNewSet } from '../../../services/apiService';
 import WorkoutDataContext from '../../../workoutData-context';
 
-const ExerciseField = (props) => {
-    const { exercises, setExercises, workoutInfo } = useContext(WorkoutDataContext);
+const ExerciseField = ({ removeExercise, ...props }) => {
+    const { workoutInfo } = useContext(WorkoutDataContext);
     const [sets, setSets] = useState(props.sets);
 
     function removeSet(setId) {
@@ -14,7 +14,6 @@ const ExerciseField = (props) => {
             const exerciseName = props.children;
             deleteExerciseSet(workoutId, exerciseName, setId).then(() => {
                 let filtered = sets.filter(x => x.id !== setId);
-                console.log(filtered);
                 setSets(filtered);
             })
                 .catch(err => console.log(err));
@@ -40,21 +39,15 @@ const ExerciseField = (props) => {
             .catch(err => console.log(err));
     }
 
-    function removeExercise() {
-        deleteExercise(workoutInfo.id, props.children)
-            .then(() => {
-                let copy = Object.assign({}, exercises);
-                delete copy[props.children];
-                setExercises(copy);
-            })
-            .catch(err => console.log(err));
+    function deleteExercise() {
+        removeExercise(props.children);
     }
 
     return (
         <div className="mb-6 border-2 border-green-500 shadow-lg rounded-lg">
             <div className="pl-6 p-2 text-xl border-b-2 border-green-500 bg-green-500 text-white font-semibold">
                 {props.children}
-                <div onClick={removeExercise} className="w-6 h-6 mt-0.5 rounded bg-red-500 float-right inline">
+                <div onClick={deleteExercise} className="w-6 h-6 mt-0.5 rounded bg-red-500 float-right inline">
                     <CloseIcon2 />
                 </div>
             </div>

@@ -39,7 +39,6 @@ module.exports = {
     },
 
     async updateNotes(id, notes) {
-        console.log(notes);
         return Workout.updateOne({ _id: id }, { $set: { notes: notes } });
     }
 };
