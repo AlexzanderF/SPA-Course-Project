@@ -7,7 +7,7 @@ const WorkoutsPreviewPage = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <div>
+        <div className="container mx-auto mt-20">
             <h1 className="text-2xl p-2">Last three workouts: </h1>
             <RecentTab />
             <AddWorkoutField showPopUp={() => setIsOpen(true)} />

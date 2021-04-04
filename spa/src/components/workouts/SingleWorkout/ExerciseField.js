@@ -47,7 +47,7 @@ const ExerciseField = ({ removeExercise, ...props }) => {
         <div className="mb-6 border-2 border-green-500 shadow-lg rounded-lg">
             <div className="pl-6 p-2 text-xl border-b-2 border-green-500 bg-green-500 text-white font-semibold">
                 {props.children}
-                <div onClick={deleteExercise} className="w-6 h-6 mt-0.5 rounded bg-red-500 float-right inline">
+                <div onClick={deleteExercise} className="w-6 h-6 mt-0.5 rounded bg-red-500 float-right inline shadow">
                     <CloseIcon2 />
                 </div>
             </div>
@@ -67,7 +67,7 @@ const ExerciseField = ({ removeExercise, ...props }) => {
                         />;
                     })}
                 </div>
-                <button className="border-2 rounded-xl border-green-500 bg-green-500 text-white font-semibold p-1 mt-4" onClick={addSetBar}>Add Set</button>
+                <button className="border-2 rounded-xl border-green-500 bg-green-500 text-white font-semibold p-1 mt-4 shadow-md" onClick={addSetBar}>Add Set</button>
             </div>
         </div>
     );

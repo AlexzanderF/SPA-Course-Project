@@ -8,7 +8,7 @@ const NavMenu = ({ isAuthenticated }) => {
             <div className="ml-6 flex flex-row">
                 <div className={btnClasses}><Link to="/">Home</Link></div>
                 <div className={btnClasses}><Link to="/workouts">Workouts</Link></div>
-                <div className={btnClasses}><Link to="/exercises">Exercises</Link></div>
+                {/* <div className={btnClasses}><Link to="/exercises">Exercises</Link></div> */}
                 <div className={btnClasses}><Link to="/about">About</Link></div>
             </div>
         );

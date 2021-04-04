@@ -41,7 +41,7 @@ const WorkoutPage = ({ match: { params: { id } } }) => {
     }
 
     return (
-        <div>
+        <div className="container mx-auto mt-20">
             { isLoading ? <Spinner /> :
                 <WorkoutDataContext.Provider value={{ workoutInfo, setWorkoutInfo, exercises, setExercises }}>
                     <div className="mx-auto w-1/2 text-center border-b-2 border-green-500">
@@ -60,7 +60,7 @@ const WorkoutPage = ({ match: { params: { id } } }) => {
                         }
                     </div>
                     <div className="w-3/5 ml-40 flex flex-row items-center">
-                        <div className="w-1/3 bg-green-500 rounded-lg p-2 text-center text-white font-semibold cursor-pointer"
+                        <div className="w-1/3 bg-green-500 rounded-lg p-2 text-center text-white font-semibold cursor-pointer shadow-md"
                             onClick={() => showAddExerciseModal ? setShowAddExerciseModal(false) : setShowAddExerciseModal(true)}>
                             Add Exercise
                         </div>

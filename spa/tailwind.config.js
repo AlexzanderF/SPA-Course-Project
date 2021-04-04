@@ -7,7 +7,10 @@ module.exports = {
     extend: {
       colors: {
         ...defaultColors,
-      }
+      },
+      backgroundImage: theme => ({
+        'guest-page': "url('./guest-page-background.jpg')"
+      })
     },
   },
   variants: {

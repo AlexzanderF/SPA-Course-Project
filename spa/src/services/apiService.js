@@ -8,11 +8,11 @@ function getJWT() {
     return localStorage['token'] || null;
 }
 function getUserEmail() {
-    return JSON.parse(localStorage['user']).email;
+    return JSON.parse(localStorage['user']).email || null;
 }
 
-export function getMostRecentWorkouts(limit, email) {
-    return fetch(endpoints.workouts + (limit ? `?limit=${limit}` : '') + (`&user=${email}`), {
+export function getMostRecentWorkouts(limit) {
+    return fetch(endpoints.workouts + (limit ? `?limit=${limit}` : '') + (`&user=${getUserEmail()}`), {
         headers: {
             'Authorization': `Bearer ${getJWT()}`
         }
@@ -20,8 +20,8 @@ export function getMostRecentWorkouts(limit, email) {
         .then(res => res.json())
         .then(data => {
             const workouts = data.workouts
-                .map(({ name, createdAt, _id }) => {
-                    return { name, createdAt, _id };
+                .map(({ name, createdAt, _id, exercises }) => {
+                    return { name, createdAt, _id, exerciseCount: Object.keys(exercises).length };
                 });
 
             return workouts;

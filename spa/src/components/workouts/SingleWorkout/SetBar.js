@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-let greenCheckClasses = "w-7 hover:bg-green-400 rounded-full cursor-pointer";
+let greenCheckClasses = "w-7 hover:bg-green-400 rounded-full cursor-pointer shadow";
 
 const SetBar = ({ setInfo, removeSet, createSet, index }) => {
     const greenCheckElem = useRef();
