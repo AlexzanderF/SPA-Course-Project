@@ -8,7 +8,7 @@ const AllWorkoutsPage = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        getMostRecentWorkouts(10)
+        getMostRecentWorkouts(1)
             .then((data) => {
                 setWorkouts(data);
                 setIsLoading(false);
@@ -18,6 +18,7 @@ const AllWorkoutsPage = () => {
 
     function loadMore() {
         let lastDate = workouts[workouts.length - 1].createdAt;
+        console.log(lastDate);
         setIsLoading(true);
         getWorkoutsAfterDate(1, lastDate)
             .then((data) => {

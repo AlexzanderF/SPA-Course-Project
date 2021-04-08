@@ -38,7 +38,8 @@ export function getWorkoutsAfterDate(limit, date) {
         headers: {
             'Authorization': `Bearer ${getJWT()}`
         },
-    });
+    })
+        .then(res => res.json());
 }
 
 export function createNewWorkout({ workoutName: name, type }) {

@@ -3,8 +3,8 @@ const Workout = require('../models/Workout');
 module.exports = {
     getMostRecent(email, count, date) {
         if (date) {
-            return Workout.find({ createdBy: email })
-                .where({ createdAt: { $gt: date } })
+            return Workout.find({ 'createdBy': email })
+                .where({ 'createdAt': { $lt: new Date(date) } })
                 .sort({ 'createdAt': -1 })
                 .limit(count);
         }
