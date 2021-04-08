@@ -1,8 +1,16 @@
 const Workout = require('../models/Workout');
 
 module.exports = {
-    getMostRecent(email, count) {
-        return Workout.find({ createdBy: email }).sort({ 'createdAt': -1 }).limit(count);
+    getMostRecent(email, count, date) {
+        if (date) {
+            return Workout.find({ createdBy: email })
+                .where({ createdAt: { $gt: date } })
+                .sort({ 'createdAt': -1 })
+                .limit(count);
+        }
+        return Workout.find({ createdBy: email })
+            .sort({ 'createdAt': -1 })
+            .limit(count);
     },
 
     createWorkout(data) {

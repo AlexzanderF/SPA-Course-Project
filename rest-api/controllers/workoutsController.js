@@ -3,11 +3,11 @@ const Workout = require('../models/Workout');
 const workoutService = require('../services/workoutService');
 
 router.get('/', async (req, res) => {
-    const { limit, user } = req.query;
+    const { limit, user, createdAfter } = req.query;
     try {
         let workouts;
         if (limit) {
-            workouts = await workoutService.getMostRecent(user, Number(limit));
+            workouts = await workoutService.getMostRecent(user, Number(limit), createdAfter);
         } else {
             workouts = await workoutService.getMostRecent(user);
         }

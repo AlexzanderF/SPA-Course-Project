@@ -30,7 +30,7 @@ const MostRecentTab = (props) => {
                                     return <WorkoutCard key={x._id} {...x} />;
                                 })}
                             </div>
-                            <Link to="/calendar">See all workouts...</Link>
+                            <Link to="/workouts">See all workouts...</Link>
                         </> :
                         <h3 className="text-center">No current workouts...</h3>
                     )

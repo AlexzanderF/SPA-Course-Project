@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getMostRecentWorkouts } from '../../../services/apiService';
+import { getMostRecentWorkouts, getWorkoutsAfterDate } from '../../../services/apiService';
 import Spinner from '../../Icons/Spinner';
 import WorkoutCard from './WorkoutCard';
 
@@ -16,6 +16,17 @@ const AllWorkoutsPage = () => {
             .catch(err => console.log(err));
     }, []);
 
+    function loadMore() {
+        let lastDate = workouts[workouts.length - 1].createdAt;
+        setIsLoading(true);
+        getWorkoutsAfterDate(1, lastDate)
+            .then((data) => {
+                setWorkouts((prev) => [...prev, ...data]);
+                setIsLoading(false);
+            })
+            .catch(err => console.log(err));
+    }
+
     return (
         <div className="container mx-auto mt-20">
             {
@@ -29,6 +40,7 @@ const AllWorkoutsPage = () => {
                         </div>
                     </div>
             }
+            <p className="mt-4 ml-48 text-lg font-bold hover:underline cursor-pointer" onClick={loadMore}>Load more workouts...</p>
         </div>
     );
 }

@@ -21,12 +21,24 @@ export function getMostRecentWorkouts(limit) {
         .then(data => {
             const workouts = data.workouts
                 .map(({ name, createdAt, _id, exercises }) => {
-                    return { name, createdAt, _id, exerciseCount: Object.keys(exercises).length };
+                    return {
+                        name, createdAt, _id,
+                        exerciseCount: exercises ? Object.keys(exercises).length : 0
+                    };
                 });
 
             return workouts;
         })
         .catch(err => console.log(err));
+}
+
+export function getWorkoutsAfterDate(limit, date) {
+    return fetch(endpoints.workouts + `?limit=${limit}&createdAfter=${date}&user=${getUserEmail()}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${getJWT()}`
+        },
+    });
 }
 
 export function createNewWorkout({ workoutName: name, type }) {
