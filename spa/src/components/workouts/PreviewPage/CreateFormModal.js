@@ -19,7 +19,6 @@ const CreateForm = ({ closeModal, trigger }) => {
         }
         createNewWorkout({ workoutName, type })
             .then(({ id }) => {
-                console.log(id);
                 history.push(`/workouts/${id}`);
             })
             .catch(err => console.log(err));

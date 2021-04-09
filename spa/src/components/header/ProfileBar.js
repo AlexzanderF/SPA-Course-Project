@@ -15,6 +15,7 @@ const ProfileBar = () => {
     function logoutHandler() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        localStorage.removeItem('expiresIn');
         setIsAuthenticated(false);
         history.push('/');
     }

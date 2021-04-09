@@ -8,7 +8,7 @@ const AllWorkoutsPage = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        getMostRecentWorkouts(1)
+        getMostRecentWorkouts(3)
             .then((data) => {
                 setWorkouts(data);
                 setIsLoading(false);
@@ -18,11 +18,10 @@ const AllWorkoutsPage = () => {
 
     function loadMore() {
         let lastDate = workouts[workouts.length - 1].createdAt;
-        console.log(lastDate);
         setIsLoading(true);
-        getWorkoutsAfterDate(1, lastDate)
-            .then((data) => {
-                setWorkouts((prev) => [...prev, ...data]);
+        getWorkoutsAfterDate(3, lastDate)
+            .then(({ workouts }) => {
+                setWorkouts((prev) => [...prev, ...workouts]);
                 setIsLoading(false);
             })
             .catch(err => console.log(err));
@@ -41,7 +40,7 @@ const AllWorkoutsPage = () => {
                         </div>
                     </div>
             }
-            <p className="mt-4 ml-48 text-lg font-bold hover:underline cursor-pointer" onClick={loadMore}>Load more workouts...</p>
+            <p className="mt-4 ml-48 mb-20 text-lg font-bold hover:underline cursor-pointer" onClick={loadMore}>Load more workouts...</p>
         </div>
     );
 }

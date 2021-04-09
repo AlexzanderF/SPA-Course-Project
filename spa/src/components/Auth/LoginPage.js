@@ -21,11 +21,6 @@ const LoginPage = () => {
         }
         loginUser(email, password)
             .then(user => {
-                localStorage.setItem('token', user.token);
-                localStorage.setItem('user', JSON.stringify({
-                    username: user.username,
-                    email: user.email
-                }));
                 Context.setIsAuthenticated(true);
                 history.push('/');
             })

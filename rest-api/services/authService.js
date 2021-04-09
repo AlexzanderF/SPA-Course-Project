@@ -54,7 +54,7 @@ async function loginUser(password, email) {
 function createJWT(user) {
     try {
         const { _id } = user;
-        const expiresIn = '1w';
+        const expiresIn = '15s';
 
         const signedToken = jwt.sign({ id: _id }, privKey, { expiresIn: expiresIn, algorithm: 'RS256' });
 

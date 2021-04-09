@@ -1,4 +1,5 @@
-const apiUrl = 'https://workout-tracker-rest-api.herokuapp.com/api/';
+// const apiUrl = 'https://workout-tracker-rest-api.herokuapp.com/api/';
+const apiUrl = 'http://localhost:6001/api/';
 
 const loginUser = async (email, password) => {
     try {
@@ -13,6 +14,15 @@ const loginUser = async (email, password) => {
             throw await res.json();
         }
         const user = await res.json();
+
+        localStorage.setItem('token', user.token);
+        let expiresIn = JSON.parse(atob(user.token.split('.')[1])).exp + '000';
+        console.log(expiresIn);
+        localStorage.setItem('expiresIn', JSON.stringify(expiresIn));
+        localStorage.setItem('user', JSON.stringify({
+            username: user.username,
+            email: user.email
+        }));
 
         return user;
     } catch (error) {
@@ -34,13 +44,31 @@ const registerUser = async (username, email, password) => {
         }
         const user = await res.json();
 
+        localStorage.setItem('token', user.token);
+        let expiresIn = JSON.parse(atob(user.token.split('.')[1])).exp + '000';
+        localStorage.setItem('expiresIn', JSON.stringify(expiresIn));
+        localStorage.setItem('user', JSON.stringify({
+            username: user.username,
+            email: user.email
+        }));
+
         return user;
     } catch (error) {
         throw error;
     }
 }
 
+const isJWTExpired = () => {
+    const expiresIn = JSON.parse(localStorage['expiresIn']);
+    const now = Date.now();
+    if (now >= expiresIn) {
+        return true;
+    }
+    return false;
+}
+
 module.exports = {
     loginUser,
-    registerUser
+    registerUser,
+    isJWTExpired
 };

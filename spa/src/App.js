@@ -1,6 +1,7 @@
-import { Route, Switch } from 'react-router-dom';
-import React, { useState } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import UserContext from './user-context';
+import { isJWTExpired } from './services/authService';
 
 import ProtectedRoute from './protected-route';
 import GuestPage from './components/GuestPage';
@@ -13,7 +14,18 @@ import WorkoutPage from './components/Workouts/SingleWorkout/WorkoutPage';
 import AllWorkoutsPage from './components/Workouts/AllWorkoutsPage/AllWorkoutsPage';
 
 function App() {
+    const history = useHistory();
     const [isAuthenticated, setIsAuthenticated] = useState(localStorage['token'] ? true : false);
+
+    if (isAuthenticated) {
+        if (isJWTExpired()) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            localStorage.removeItem('expiresIn');
+            setIsAuthenticated(false);
+            history.push('/');
+        }
+    }
 
     return (
         <UserContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>

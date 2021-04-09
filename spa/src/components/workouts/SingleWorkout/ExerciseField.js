@@ -10,7 +10,7 @@ const ExerciseField = ({ removeExercise, ...props }) => {
 
     function removeSet(setId) {
         if (typeof setId === 'string') {
-            const workoutId = workoutInfo.workoutInfo.id;
+            const workoutId = workoutInfo.id;
             const exerciseName = props.children;
             deleteExerciseSet(workoutId, exerciseName, setId).then(() => {
                 let filtered = sets.filter(x => x.id !== setId);
