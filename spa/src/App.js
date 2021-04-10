@@ -1,6 +1,6 @@
 import { Route, Switch, useHistory } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import UserContext from './user-context';
+import { useState } from 'react';
+import UserContext from './contexts/user-context';
 import { isJWTExpired } from './services/authService';
 
 import ProtectedRoute from './protected-route';
@@ -17,14 +17,12 @@ function App() {
     const history = useHistory();
     const [isAuthenticated, setIsAuthenticated] = useState(localStorage['token'] ? true : false);
 
-    if (isAuthenticated) {
-        if (isJWTExpired()) {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            localStorage.removeItem('expiresIn');
-            setIsAuthenticated(false);
-            history.push('/');
-        }
+    if (isAuthenticated && isJWTExpired()) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('expiresIn');
+        setIsAuthenticated(false);
+        history.push('/');
     }
 
     return (

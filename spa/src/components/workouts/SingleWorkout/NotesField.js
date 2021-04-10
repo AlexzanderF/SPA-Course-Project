@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { addWorkoutNotes } from '../../../services/apiService';
-import WorkoutDataContext from '../../../workoutData-context';
+import WorkoutDataContext from '../../../contexts/workoutData-context';
 
 const NotesField = () => {
     const { workoutInfo, setWorkoutInfo } = useContext(WorkoutDataContext);

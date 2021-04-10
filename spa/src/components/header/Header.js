@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import AuthButtons from './AuthButtons';
 import NavMenu from './NavMenu';
 import ProfileBar from './ProfileBar';
-import UserContext from '../../user-context';
+import UserContext from '../../contexts/user-context';
 
 const headerClasses = "bg-gray-600 text-white flex flex-row flex-nowrap items-center border-b-4 border-green-500";
 

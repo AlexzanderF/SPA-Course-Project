@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import UserContext from '../../user-context';
+import UserContext from '../../contexts/user-context';
 
 const btnClasses = "text-white font-medium mx-6 p-3 border-2 rounded-2xl bg-green-500 border-green-500 shadow-md";
 

@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { registerUser } from '../../services/authService';
-import UserContext from '../../user-context';
+import UserContext from '../../contexts/user-context';
 
 const inputClasses = "w-1/2 p-2 mb-5 rounded-3xl border-2 border-green-500 shadow-lg focus:border-2 focus:border-gray-600";
 const errorBoxClasses = "text-white font-semibold border-2 border-white rounded-2xl bg-rose-500 w-1/3 mx-auto shadow-md";

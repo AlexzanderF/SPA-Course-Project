@@ -17,7 +17,6 @@ const loginUser = async (email, password) => {
 
         localStorage.setItem('token', user.token);
         let expiresIn = JSON.parse(atob(user.token.split('.')[1])).exp + '000';
-        console.log(expiresIn);
         localStorage.setItem('expiresIn', JSON.stringify(expiresIn));
         localStorage.setItem('user', JSON.stringify({
             username: user.username,

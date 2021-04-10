@@ -1,7 +1,7 @@
 import { useState, useContext, useRef } from 'react';
 import PlusIcon from '../../Icons/PlusIcon';
 import { addExercise } from '../../../services/apiService';
-import WorkoutDataContext from '../../../workoutData-context';
+import WorkoutDataContext from '../../../contexts/workoutData-context';
 
 const AddExerciseModal = ({ closeModal }) => {
     const inputElem = useRef();

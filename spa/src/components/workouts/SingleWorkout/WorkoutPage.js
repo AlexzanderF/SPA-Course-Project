@@ -4,7 +4,7 @@ import ExerciseField from './ExerciseField';
 import NotesField from './NotesField';
 import AddExerciseModal from './AddExerciseModal';
 import { getWorkoutData, deleteExercise } from '../../../services/apiService';
-import WorkoutDataContext from '../../../workoutData-context';
+import WorkoutDataContext from '../../../contexts/workoutData-context';
 
 const WorkoutPage = ({ match: { params: { id } } }) => {
     const [workoutInfo, setWorkoutInfo] = useState({});

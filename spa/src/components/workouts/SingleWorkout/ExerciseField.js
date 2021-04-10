@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import SetBar from './SetBar';
 import CloseIcon2 from '../../Icons/CloseIcon2';
 import { deleteExerciseSet, addNewSet } from '../../../services/apiService';
-import WorkoutDataContext from '../../../workoutData-context';
+import WorkoutDataContext from '../../../contexts/workoutData-context';
 
 const ExerciseField = ({ removeExercise, ...props }) => {
     const { workoutInfo } = useContext(WorkoutDataContext);
