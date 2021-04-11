@@ -14,9 +14,9 @@ export function getMostRecentWorkouts(limit) {
     return axios.get(endpoints.workouts + (limit ? `?limit=${limit}` : '') + (`&user=${getUserEmail()}`))
         .then(({ data }) => {
             const workouts = data.workouts
-                .map(({ name, createdAt, _id, exercises }) => {
+                .map(({ name, createdAt, _id, exercises, type }) => {
                     return {
-                        name, createdAt, _id,
+                        name, createdAt, _id, type,
                         exerciseCount: exercises ? Object.keys(exercises).length : 0
                     };
                 });

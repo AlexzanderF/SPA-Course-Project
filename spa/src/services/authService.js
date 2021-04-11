@@ -1,5 +1,5 @@
-// const apiUrl = 'https://workout-tracker-rest-api.herokuapp.com/api/';
-const apiUrl = 'http://localhost:6001/api/';
+// const apiUrl = 'http://localhost:6001/api/'; // FOR TESTING LOCALLY
+const apiUrl = 'https://workout-tracker-rest-api.herokuapp.com/api/';
 
 const loginUser = async (email, password) => {
     try {

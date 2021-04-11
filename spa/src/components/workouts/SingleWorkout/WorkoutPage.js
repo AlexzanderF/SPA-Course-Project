@@ -46,6 +46,7 @@ const WorkoutPage = ({ match: { params: { id } } }) => {
                 <WorkoutDataContext.Provider value={{ workoutInfo, setWorkoutInfo, exercises, setExercises }}>
                     <div className="mx-auto w-1/2 text-center border-b-2 border-green-500">
                         <h1 className="text-3xl m-3 font-semibold">Workout: {workoutInfo.name}</h1>
+                        <h2 className="text-xl m-3">Type: {workoutInfo.type}</h2>
                         <h2 className="text-xl m-3">Date: {workoutInfo.createdAt}</h2>
                     </div>
                     <div className="mt-10 mx-auto p-5 w-5/6 flex flex-col flex-wrap">

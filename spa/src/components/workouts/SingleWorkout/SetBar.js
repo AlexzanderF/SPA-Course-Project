@@ -8,7 +8,7 @@ const SetBar = ({ setInfo, removeSet, createSet, index }) => {
 
     function submitSet() {
         try {
-            if (reps > 0 && typeof reps === 'number' && weight > 0 && typeof weight === 'number') {
+            if (reps > 0 && typeof reps === 'number') {
                 createSet(reps, weight);
             }
         } catch (error) {

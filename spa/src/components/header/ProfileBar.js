@@ -22,7 +22,7 @@ const ProfileBar = () => {
 
     return (
         <div className="ml-auto flex flex-row items-center">
-            <div>Logged as [{username}]</div>
+            <div>Welcome, [{username}]</div>
             <button className={btnClasses} onClick={logoutHandler}>Logout</button>
         </div>
     );
