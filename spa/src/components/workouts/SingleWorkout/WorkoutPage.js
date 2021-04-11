@@ -15,13 +15,14 @@ const WorkoutPage = ({ match: { params: { id } } }) => {
     useEffect(() => {
         getWorkoutData(id)
             .then((data) => {
-                const { name, _id, notes } = data;
+                const { name, _id, notes, type } = data;
                 let createdAt = new Date(data.createdAt).toLocaleDateString('en-GB');
                 setWorkoutInfo({
                     createdAt,
                     name,
                     id: _id,
-                    notes
+                    notes,
+                    type
                 });
                 setExercises(data.exercises);
                 setIsLoading(false);

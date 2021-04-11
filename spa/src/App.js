@@ -12,6 +12,7 @@ import ProfilePage from './components/Profile/ProfilePage';
 import WorkoutsPreviewPage from './components/Workouts/PreviewPage/WorkoutsPreviewPage';
 import WorkoutPage from './components/Workouts/SingleWorkout/WorkoutPage';
 import AllWorkoutsPage from './components/Workouts/AllWorkoutsPage/AllWorkoutsPage';
+import AboutPage from './components/About/AboutPage';
 
 function App() {
     const history = useHistory();
@@ -54,6 +55,10 @@ function App() {
                     path="/workouts"
                     isAuthenticated={isAuthenticated}
                     component={AllWorkoutsPage}
+                />
+                <Route exact
+                    path="/about"
+                    component={AboutPage}
                 />
                 <Route path="*" exact
                     component={() => (
